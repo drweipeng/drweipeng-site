@@ -45,10 +45,12 @@
   nav.menu a{text-decoration:none;color:var(--ink-2);}
   nav.menu a:hover{color:var(--ink-1);}
   .nav-cta{background:var(--accent);color:var(--accent-ink);padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:600;text-decoration:none;white-space:nowrap;}
-  @media (max-width:760px){ nav.menu{display:none;} }
+  .nav-info{display:none;font-size:.88rem;color:var(--ink-2);text-decoration:none;white-space:nowrap;}
+  @media (max-width:760px){ nav.menu{display:none;} .nav-info{display:inline;} }
 
   /* hero */
-  .hero{padding:76px 0 60px;}
+  .hero{padding:76px 24px 60px;}
+  @media (max-width:640px){ .hero{padding:56px 16px 48px;} }
   .hero .eb{font-family:'cwTeX Q Kai','Noto Serif TC',serif;font-size:1rem;color:var(--accent);margin-bottom:14px;}
   .hero h1{font-family:'cwTeX Q Kai','Noto Serif TC',serif;font-weight:400;font-size:clamp(1.9rem,1.4rem + 2vw,2.9rem);line-height:1.35;margin:0 0 18px;text-wrap:balance;max-width:16ch;}
   .hero p.lead{color:var(--ink-2);font-size:1.02rem;line-height:1.85;max-width:52ch;margin:0 0 28px;}
@@ -216,9 +218,10 @@
         <li><a href="#directory">專長分類</a></li>
         <li><a href="#cases">個案分享</a></li>
         <li><a href="#about">關於醫師</a></li>
+        <li><a href="contact.html">看診資訊</a></li>
       </ul>
     </nav>
-    <a class="nav-cta" href="#contact">預約諮詢</a>
+    <a class="nav-info" href="contact.html">看診資訊</a>
   </div>
 </header>
 
@@ -227,8 +230,7 @@
   <h1>腰椎顧得好，人生走得穩</h1>
   <p class="lead">臨床著重腰椎椎間盤突出、脊椎滑脫、薦髂關節痛等下背與坐骨神經痛問題，以超音波導引中醫針刀、乾針處理神經周邊的軟組織張力與沾黏，並搭配動作訓練重建脊椎穩定度，也持續照顧退化性膝關節炎等其他筋骨疼痛問題。</p>
   <div class="ctas">
-    <a class="btn primary" href="#contact">預約諮詢</a>
-    <a class="btn ghost" href="#directory">瀏覽文章庫</a>
+    <a class="btn primary" href="#directory">瀏覽文章庫</a>
   </div>
   <div class="hero-pills" id="hero-stats"></div>
 </div>
@@ -277,7 +279,7 @@
       <h3>王威鵬 醫師</h3>
       <div class="role">中醫腰椎神經減壓．疼痛醫學</div>
       <p class="tagline">具中、西醫雙執照，臨床著重中醫腰椎神經減壓與筋骨疼痛處置，兼顧中醫內科、婦兒科調理與美顏針。</p>
-      <p>現於悅衡整合醫學診所看診，並持續在部落格整理臨床觀察與治療思路，累積成這座文章庫。</p>
+      <p>現於悅衡整合醫學診所看診（<a href="contact.html">看診資訊</a>），並持續在部落格整理臨床觀察與治療思路，累積成這座文章庫。</p>
 
       <div class="spec-cards">
         <div class="sc primary">
@@ -337,72 +339,10 @@
   <div class="case-scroll" id="case-scroll"></div>
 </section>
 
-<section class="wrap" id="contact">
-  <div class="section-head">
-    <span class="eyebrow">Contact</span>
-    <h2>預約諮詢</h2>
-    <p>王威鵬醫師目前於悅衡整合醫學診所看診，門診時段依診所最新公告為準。</p>
-  </div>
-  <div class="contact-box">
-    <div class="contact-grid">
-      <dl>
-        <dt>看診地點</dt>
-        <dd>悅衡整合醫學診所（桃園）<br>桃園市桃園區正光路510號1樓<br>03-2151173</dd>
-      </dl>
-      <dl>
-        <dt>社群/聯絡</dt>
-        <dd>LINE 官方帳號 @046tnvei<br><a href="https://joymony.com" target="_blank" rel="noopener">joymony.com</a> · <a href="https://www.facebook.com/JoyMony510" target="_blank" rel="noopener">悅衡 Facebook</a></dd>
-      </dl>
-    </div>
-    <div class="schedule-block">
-      <div class="stitle">王威鵬醫師門診時段</div>
-      <table class="schedule-table">
-        <thead>
-          <tr><th></th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>早診</th>
-            <td class="off">—</td>
-            <td class="on"><span class="cn">悅衡</span><span class="ct">09:00–12:30</span></td>
-            <td class="off">—</td>
-            <td class="off">—</td>
-            <td class="on"><span class="cn">悅衡</span><span class="ct">09:00–12:30</span></td>
-            <td class="off">—</td>
-          </tr>
-          <tr>
-            <th>午診</th>
-            <td class="off">—</td>
-            <td class="on"><span class="cn">悅衡</span><span class="ct">14:00–17:30</span></td>
-            <td class="on"><span class="cn">悅衡</span><span class="ct">14:00–17:30</span></td>
-            <td class="on"><span class="cn">悅衡</span><span class="ct">14:00–17:30</span></td>
-            <td class="on"><span class="cn">悅衡</span><span class="ct">14:00–17:30</span></td>
-            <td class="off">—</td>
-          </tr>
-          <tr>
-            <th>晚診</th>
-            <td class="off">—</td>
-            <td class="on"><span class="cn">悅衡*</span><span class="ct">19:00–21:30</span></td>
-            <td class="on"><span class="cn">悅衡</span><span class="ct">18:00–21:30</span></td>
-            <td class="off">—</td>
-            <td class="off">—</td>
-            <td class="off">—</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="schedule-legend">
-        <span><i class="l1"></i>悅衡整合醫學診所（桃園）</span>
-      </div>
-      <p class="schedule-note">*週二夜診較平常延後一小時開診，19:00 才開診，請留意時間。以上為 2026 年 9 月門診時間，實際請以診所最新公告為準。</p>
-    </div>
-  </div>
-  <p class="source-note">門診時段資訊整理自診所 2026/09 公告，實際掛號與名額請以診所現場或官方管道回覆為準。</p>
-</section>
-
 <footer class="site">
   <div class="wrap">
     <div class="kai" style="margin-bottom:6px">王威鵬醫師 臨床筆記</div>
-    內容整理自 <a href="https://pengmd.blogspot.com/" target="_blank" rel="noopener">pengmd.blogspot.com</a> 部落格文章，持續更新中。
+    內容整理自 <a href="https://pengmd.blogspot.com/" target="_blank" rel="noopener">pengmd.blogspot.com</a> 部落格文章，持續更新中。 · <a href="contact.html">看診資訊</a>
   </div>
 </footer>
 
