@@ -501,7 +501,9 @@ function openArticle(id){
     ? html
     : `<p>本篇全文尚未收錄，請點下方連結至原始部落格閱讀。</p>`;
   document.getElementById('modal-body').innerHTML = bodyHtml + tagsHtml +
+    (html !== undefined ? `<a class="modal-source" href="posts/${p.id}.html">開啟單篇文章頁（可分享連結）→</a><br>` : '') +
     (p.u ? `<a class="modal-source" href="${p.u}" target="_blank" rel="noopener">在原始部落格開啟原文 →</a>` : '');
+  history.replaceState(null, '', `#post-${p.id}`);
   lastFocused = document.activeElement;
   modalBackdrop.classList.add('open');
   document.getElementById('modal').scrollTop = 0;
@@ -511,6 +513,7 @@ function openArticle(id){
 function closeModal(){
   modalBackdrop.classList.remove('open');
   document.body.style.overflow = '';
+  if(location.hash.startsWith('#post-')) history.replaceState(null, '', location.pathname + location.search);
   if(lastFocused) lastFocused.focus();
 }
 document.getElementById('modal-close').addEventListener('click', closeModal);
@@ -545,4 +548,10 @@ renderLatest();
 
 buildChips();
 render();
+
+// deep link: drweipeng.com/#post-54 opens that article
+(function(){
+  const m = location.hash.match(/^#post-(\d+)$/);
+  if(m) openArticle(Number(m[1]));
+})();
 </script>
