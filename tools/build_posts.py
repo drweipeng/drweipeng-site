@@ -36,6 +36,12 @@ PAGE_CSS = """
   .post-head{padding:26px 24px 18px;border-bottom:1px solid var(--border);}
   .post-head h1{font-family:'cwTeX Q Kai','Noto Serif TC',serif;font-weight:400;font-size:1.6rem;line-height:1.5;margin:10px 0 0;color:var(--ink-1);}
   .post .modal-body{font-size:1rem;}
+  .share-bar{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+  .share-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;font-size:.88rem;font-weight:600;text-decoration:none;border:1px solid var(--border);background:var(--surface);color:var(--ink-1);cursor:pointer;font-family:inherit;line-height:1.2;}
+  .share-btn:hover{border-color:var(--accent);}
+  .share-btn.line{background:#06C755;border-color:#06C755;color:#fff;}
+  .share-btn.line:hover{filter:brightness(.95);}
+  .share-bar.bottom{margin-top:22px;padding-top:16px;border-top:1px solid var(--border);}
 """
 
 
@@ -68,6 +74,23 @@ def with_disclaimer(p, body):
     return body + "\n" + DISCLAIMER_HTML
 
 
+SHARE_JS = """<script>
+document.querySelectorAll('.copy-link').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var url = btn.dataset.url, label = btn.textContent;
+    function done(){ btn.textContent = '已複製 ✓'; setTimeout(function(){ btn.textContent = label; }, 1800); }
+    function fallback(){
+      var t = document.createElement('textarea'); t.value = url; t.setAttribute('readonly',''); t.style.position='fixed'; t.style.opacity='0';
+      document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); done(); } catch(e) { window.prompt('請複製這個連結：', url); }
+      document.body.removeChild(t);
+    }
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(url).then(done, fallback); } else { fallback(); }
+  });
+});
+</script>"""
+
+
 def page(p, body):
     body = with_disclaimer(p, body)
     pid = p["id"]
@@ -75,6 +98,11 @@ def page(p, body):
     title = p["t"]
     desc = description(body)
     img = first_image(body)
+    from urllib.parse import quote
+    line_url = "https://social-plugins.line.me/lineit/share?url=" + quote(url, safe="")
+    share = lambda cls: (f'<div class="share-bar {cls}">'
+                         f'<a class="share-btn line" href="{line_url}" target="_blank" rel="noopener">分享到 LINE</a>'
+                         f'<button type="button" class="share-btn copy-link" data-url="{url}">複製連結</button></div>')
     local_body = re.sub(r'src="assets/', 'src="../assets/', body)
     local_body = re.sub(r"(<table.*?</table>)", r'<div class="table-wrap">\1</div>', local_body, flags=re.S)
     tags = "".join(f'<span class="tag">{html.escape(t)}</span>' for t in p["tags"])
@@ -134,11 +162,13 @@ def page(p, body):
         <time class="date" datetime="{p['d']}">{p['d']}</time>
       </div>
       <h1>{e(title)}</h1>
+      {share("")}
     </div>
     <div class="modal-body">
 {local_body}
 <div class="modal-tags">{tags}</div>
 {source}
+{share("bottom")}
     </div>
   </article>
 </main>
@@ -148,6 +178,7 @@ def page(p, body):
     <a href="/">回首頁</a> · <a href="/contact.html">看診資訊</a>
   </div>
 </footer>
+{SHARE_JS}
 </body>
 </html>
 """

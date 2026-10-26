@@ -233,6 +233,12 @@
   .post-head{padding:26px 24px 18px;border-bottom:1px solid var(--border);}
   .post-head h1{font-family:'cwTeX Q Kai','Noto Serif TC',serif;font-weight:400;font-size:1.6rem;line-height:1.5;margin:10px 0 0;color:var(--ink-1);}
   .post .modal-body{font-size:1rem;}
+  .share-bar{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+  .share-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;font-size:.88rem;font-weight:600;text-decoration:none;border:1px solid var(--border);background:var(--surface);color:var(--ink-1);cursor:pointer;font-family:inherit;line-height:1.2;}
+  .share-btn:hover{border-color:var(--accent);}
+  .share-btn.line{background:#06C755;border-color:#06C755;color:#fff;}
+  .share-btn.line:hover{filter:brightness(.95);}
+  .share-bar.bottom{margin-top:22px;padding-top:16px;border-top:1px solid var(--border);}
 </style>
 </head>
 <body>
@@ -260,6 +266,7 @@
         <time class="date" datetime="2024-12-05">2024-12-05</time>
       </div>
       <h1>麻疹初期症狀如感冒，不可輕忽！</h1>
+      <div class="share-bar "><a class="share-btn line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fdrweipeng.com%2Fposts%2F44.html" target="_blank" rel="noopener">分享到 LINE</a><button type="button" class="share-btn copy-link" data-url="https://drweipeng.com/posts/44.html">複製連結</button></div>
     </div>
     <div class="modal-body">
 <p>衛生福利部焦點新聞節錄：『疾管署說明，我國今(2024)年累計13例麻疹病例，年齡介於20至40多歲，6例為本土病例(含2起群聚)，另7例為境外移入病例，其中2例感染國家為馬來西亞、2例為航空器群聚感染、其餘3例分別為泰國、柬埔寨及越南。今年本土及境外移入病例數高於2020-2023年同期的0-2例，均為五年同期最高。』</p>
@@ -329,6 +336,7 @@ RT-PCR：檢測麻疹病毒的核酸，敏感性高，特別適用於早期確�
 <hr><p class="disclaimer"><em>本文僅供醫療衛生教育參考，不能取代醫師的診斷與治療。每個人的病情、體質與治療反應不同，文中提及的治療方式並非適用於所有人，亦不保證療效；侵入性治療可能伴隨副作用與風險。如有身體不適，請尋求合格醫療專業人員當面評估。</em></p>
 <div class="modal-tags"><span class="tag">麻疹</span><span class="tag">傳染病</span><span class="tag">免疫</span><span class="tag">公共衛生</span></div>
 <a class="modal-source" href="https://pengmd.blogspot.com/2024/12/blog-post.html" target="_blank" rel="noopener">在原始部落格開啟原文 →</a>
+<div class="share-bar bottom"><a class="share-btn line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fdrweipeng.com%2Fposts%2F44.html" target="_blank" rel="noopener">分享到 LINE</a><button type="button" class="share-btn copy-link" data-url="https://drweipeng.com/posts/44.html">複製連結</button></div>
     </div>
   </article>
 </main>
@@ -338,5 +346,20 @@ RT-PCR：檢測麻疹病毒的核酸，敏感性高，特別適用於早期確�
     <a href="/">回首頁</a> · <a href="/contact.html">看診資訊</a>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.copy-link').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var url = btn.dataset.url, label = btn.textContent;
+    function done(){ btn.textContent = '已複製 ✓'; setTimeout(function(){ btn.textContent = label; }, 1800); }
+    function fallback(){
+      var t = document.createElement('textarea'); t.value = url; t.setAttribute('readonly',''); t.style.position='fixed'; t.style.opacity='0';
+      document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); done(); } catch(e) { window.prompt('請複製這個連結：', url); }
+      document.body.removeChild(t);
+    }
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(url).then(done, fallback); } else { fallback(); }
+  });
+});
+</script>
 </body>
 </html>

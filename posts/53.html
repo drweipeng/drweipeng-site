@@ -233,6 +233,12 @@
   .post-head{padding:26px 24px 18px;border-bottom:1px solid var(--border);}
   .post-head h1{font-family:'cwTeX Q Kai','Noto Serif TC',serif;font-weight:400;font-size:1.6rem;line-height:1.5;margin:10px 0 0;color:var(--ink-1);}
   .post .modal-body{font-size:1rem;}
+  .share-bar{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+  .share-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;font-size:.88rem;font-weight:600;text-decoration:none;border:1px solid var(--border);background:var(--surface);color:var(--ink-1);cursor:pointer;font-family:inherit;line-height:1.2;}
+  .share-btn:hover{border-color:var(--accent);}
+  .share-btn.line{background:#06C755;border-color:#06C755;color:#fff;}
+  .share-btn.line:hover{filter:brightness(.95);}
+  .share-bar.bottom{margin-top:22px;padding-top:16px;border-top:1px solid var(--border);}
 </style>
 </head>
 <body>
@@ -260,6 +266,7 @@
         <time class="date" datetime="2026-10-13">2026-10-13</time>
       </div>
       <h1>手突然疼痛舉不起來，肩膀「長石頭」了：肩部肌腱的鈣化性肌腱炎</h1>
+      <div class="share-bar "><a class="share-btn line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fdrweipeng.com%2Fposts%2F53.html" target="_blank" rel="noopener">分享到 LINE</a><button type="button" class="share-btn copy-link" data-url="https://drweipeng.com/posts/53.html">複製連結</button></div>
     </div>
     <div class="modal-body">
 <p>雅琴姐48歲，某天早上醒來，右肩突然痛到連梳頭、穿內衣都做不到，晚上翻身壓到更是直接痛醒。她唯一有印象可能造成外傷的事件只有幾天前搬了一下摩托車，目前貼了幾天藥布卻越來越痛，手連舉到胸口的高度都很勉強。</p>
@@ -347,6 +354,7 @@
 </ol>
 <div class="modal-tags"><span class="tag">鈣化性肌腱炎</span><span class="tag">肩膀痛</span><span class="tag">旋轉肌袖</span><span class="tag">棘上肌</span><span class="tag">夜間肩痛</span><span class="tag">超音波診斷</span><span class="tag">針刀</span><span class="tag">乾針</span><span class="tag">運動處方</span></div>
 
+<div class="share-bar bottom"><a class="share-btn line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fdrweipeng.com%2Fposts%2F53.html" target="_blank" rel="noopener">分享到 LINE</a><button type="button" class="share-btn copy-link" data-url="https://drweipeng.com/posts/53.html">複製連結</button></div>
     </div>
   </article>
 </main>
@@ -356,5 +364,20 @@
     <a href="/">回首頁</a> · <a href="/contact.html">看診資訊</a>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.copy-link').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var url = btn.dataset.url, label = btn.textContent;
+    function done(){ btn.textContent = '已複製 ✓'; setTimeout(function(){ btn.textContent = label; }, 1800); }
+    function fallback(){
+      var t = document.createElement('textarea'); t.value = url; t.setAttribute('readonly',''); t.style.position='fixed'; t.style.opacity='0';
+      document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); done(); } catch(e) { window.prompt('請複製這個連結：', url); }
+      document.body.removeChild(t);
+    }
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(url).then(done, fallback); } else { fallback(); }
+  });
+});
+</script>
 </body>
 </html>

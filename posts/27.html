@@ -233,6 +233,12 @@
   .post-head{padding:26px 24px 18px;border-bottom:1px solid var(--border);}
   .post-head h1{font-family:'cwTeX Q Kai','Noto Serif TC',serif;font-weight:400;font-size:1.6rem;line-height:1.5;margin:10px 0 0;color:var(--ink-1);}
   .post .modal-body{font-size:1rem;}
+  .share-bar{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+  .share-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;font-size:.88rem;font-weight:600;text-decoration:none;border:1px solid var(--border);background:var(--surface);color:var(--ink-1);cursor:pointer;font-family:inherit;line-height:1.2;}
+  .share-btn:hover{border-color:var(--accent);}
+  .share-btn.line{background:#06C755;border-color:#06C755;color:#fff;}
+  .share-btn.line:hover{filter:brightness(.95);}
+  .share-bar.bottom{margin-top:22px;padding-top:16px;border-top:1px solid var(--border);}
 </style>
 </head>
 <body>
@@ -260,6 +266,7 @@
         <time class="date" datetime="2026-03-22">2026-03-22</time>
       </div>
       <h1>隱藏在深處，摸不到的腰痠痛；髂腰韌帶症候群</h1>
+      <div class="share-bar "><a class="share-btn line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fdrweipeng.com%2Fposts%2F27.html" target="_blank" rel="noopener">分享到 LINE</a><button type="button" class="share-btn copy-link" data-url="https://drweipeng.com/posts/27.html">複製連結</button></div>
     </div>
     <div class="modal-body">
 <h2>案例介紹</h2>
@@ -286,6 +293,7 @@
 <hr><p class="disclaimer"><em>本文僅供醫療衛生教育參考，不能取代醫師的診斷與治療。每個人的病情、體質與治療反應不同，文中提及的治療方式並非適用於所有人，亦不保證療效；侵入性治療可能伴隨副作用與風險。如有身體不適，請尋求合格醫療專業人員當面評估。</em></p>
 <div class="modal-tags"><span class="tag">乾針</span><span class="tag">台北中醫</span><span class="tag">小針刀</span><span class="tag">桃園中醫</span><span class="tag">腰痛</span><span class="tag">腰痛不會好</span><span class="tag">腰酸</span><span class="tag">髂腰韌帶</span></div>
 <a class="modal-source" href="https://pengmd.blogspot.com/2026/03/blog-post.html" target="_blank" rel="noopener">在原始部落格開啟原文 →</a>
+<div class="share-bar bottom"><a class="share-btn line" href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fdrweipeng.com%2Fposts%2F27.html" target="_blank" rel="noopener">分享到 LINE</a><button type="button" class="share-btn copy-link" data-url="https://drweipeng.com/posts/27.html">複製連結</button></div>
     </div>
   </article>
 </main>
@@ -295,5 +303,20 @@
     <a href="/">回首頁</a> · <a href="/contact.html">看診資訊</a>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.copy-link').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var url = btn.dataset.url, label = btn.textContent;
+    function done(){ btn.textContent = '已複製 ✓'; setTimeout(function(){ btn.textContent = label; }, 1800); }
+    function fallback(){
+      var t = document.createElement('textarea'); t.value = url; t.setAttribute('readonly',''); t.style.position='fixed'; t.style.opacity='0';
+      document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); done(); } catch(e) { window.prompt('請複製這個連結：', url); }
+      document.body.removeChild(t);
+    }
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(url).then(done, fallback); } else { fallback(); }
+  });
+});
+</script>
 </body>
 </html>
