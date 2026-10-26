@@ -58,7 +58,18 @@ def first_image(body):
     return s if s.startswith("http") else f"{SITE}/{s.lstrip('/')}"
 
 
+DISCLAIMER_HTML = ('<hr><p class="disclaimer"><em>本文僅供醫療衛生教育參考，不能取代醫師的診斷與治療。每個人的病情、體質與治療反應不同，'
+                   '文中提及的治療方式並非適用於所有人，亦不保證療效；侵入性治療可能伴隨副作用與風險。如有身體不適，請尋求合格醫療專業人員當面評估。</em></p>')
+
+
+def with_disclaimer(p, body):
+    if "不能取代醫師的診斷" in body or p["c"] == "關於醫師":
+        return body
+    return body + "\n" + DISCLAIMER_HTML
+
+
 def page(p, body):
+    body = with_disclaimer(p, body)
     pid = p["id"]
     url = f"{SITE}/posts/{pid}.html"
     title = p["t"]
