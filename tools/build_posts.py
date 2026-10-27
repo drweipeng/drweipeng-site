@@ -97,7 +97,7 @@ def page(p, body):
     url = f"{SITE}/posts/{pid}.html"
     title = p["t"]
     desc = description(body)
-    img = first_image(body)
+    img = f"{SITE}/{p['og']}" if p.get("og") else first_image(body)
     from urllib.parse import quote
     line_url = "https://social-plugins.line.me/lineit/share?url=" + quote(url, safe="")
     share = lambda cls: (f'<div class="share-bar {cls}">'
