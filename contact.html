@@ -171,7 +171,8 @@
   .schedule-table td.on{background:var(--accent-soft);color:var(--accent);}
   .schedule-table td.on.clinic2{background:var(--accent2-soft);color:var(--accent2);}
   .schedule-table td.on .cn{font-weight:700;font-size:.76rem;}
-  .schedule-table .nw{white-space:nowrap;}
+  .schedule-table td.on .cn{white-space:nowrap;}
+  @media (max-width:640px){ .schedule-table td.on.clinic2 .cn{font-size:.6rem;letter-spacing:-.02em;} }
   .schedule-table td.on .ct{display:block;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:.66rem;opacity:.85;margin-top:2px;}
   .schedule-table td.off{color:var(--border);}
   .schedule-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:.78rem;color:var(--ink-2);}
@@ -266,10 +267,10 @@
         <tbody>
           <tr>
             <th>早診</th>
-            <td class="on clinic2"><span class="cn"><span class="nw">民生</span><wbr><span class="nw">瀚威</span></span><span class="ct">09:30–12:30</span></td>
+            <td class="on clinic2"><span class="cn">民生瀚威</span><span class="ct">09:30–12:30</span></td>
             <td class="on"><span class="cn">悅衡</span><span class="ct">09:00–12:30</span></td>
             <td class="off">—</td>
-            <td class="on clinic2"><span class="cn"><span class="nw">民生</span><wbr><span class="nw">瀚威</span></span><span class="ct">09:30–12:30</span></td>
+            <td class="on clinic2"><span class="cn">民生瀚威</span><span class="ct">09:30–12:30</span></td>
             <td class="on"><span class="cn">悅衡</span><span class="ct">09:00–12:30</span></td>
             <td class="off">—</td>
           </tr>
