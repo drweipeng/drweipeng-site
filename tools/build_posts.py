@@ -42,7 +42,37 @@ PAGE_CSS = """
   .share-btn.line{background:#06C755;border-color:#06C755;color:#fff;}
   .share-btn.line:hover{filter:brightness(.95);}
   .share-bar.bottom{margin-top:22px;padding-top:16px;border-top:1px solid var(--border);}
+  .author-box{display:flex;gap:16px;align-items:flex-start;margin-top:24px;padding:18px;border:1px solid var(--border);border-radius:14px;background:var(--surface-2);}
+  .author-box img{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:none;}
+  .author-box .name{font-weight:700;color:var(--ink-1);margin-bottom:4px;}
+  .author-box p{margin:0 0 6px;font-size:.88rem;line-height:1.75;color:var(--ink-2);}
+  .author-box a{color:var(--accent);font-weight:600;text-decoration:none;font-size:.88rem;}
+  .author-box a:hover{text-decoration:underline;}
+  .related{margin-top:28px;}
+  .related h2{font-family:'cwTeX Q Kai','Noto Serif TC',serif;font-weight:400;font-size:1.15rem;margin:0 0 10px;color:var(--ink-1);}
+  .related ul{margin:0;padding-left:20px;line-height:1.9;}
+  .related a{color:var(--accent);text-decoration:none;}
+  .related a:hover{text-decoration:underline;}
 """
+
+AUTHOR_HTML = ('<aside class="author-box"><img src="../assets/wei-peng-photo.jpg" alt="王威鵬醫師">'
+               '<div><div class="name">王威鵬 醫師</div>'
+               '<p>具中、西醫雙執照，臨床著重腰椎、骨盆與膝關節等筋骨疼痛，結合超音波評估與中醫針刀、乾針及動作訓練。'
+               '目前於悅衡整合醫學診所（桃園）、民生瀚威中醫診所（台北）看診。</p>'
+               '<a href="/#about">關於醫師</a> · <a href="/contact.html">看診地點與門診時間</a></div></aside>')
+
+
+def related_html(p):
+    same = [q for q in posts if q["id"] != p["id"] and q["c"] == p["c"] and str(q["id"]) in content]
+    shared = lambda q: len(set(q["tags"]) & set(p["tags"]))
+    same.sort(key=lambda q: q["d"], reverse=True)
+    same.sort(key=lambda q: -shared(q))
+    picks = same[:4]
+    if not picks:
+        return ""
+    items = "".join(f'<li><a href="/posts/{q["id"]}.html">{html.escape(q["t"])}</a></li>' for q in picks)
+    return f'<nav class="related"><h2>延伸閱讀</h2><ul>{items}</ul></nav>'
+
 
 
 def text_of(fragment):
@@ -106,12 +136,13 @@ def page(p, body):
     local_body = re.sub(r'src="assets/', 'src="../assets/', body)
     local_body = re.sub(r"(<table.*?</table>)", r'<div class="table-wrap">\1</div>', local_body, flags=re.S)
     tags = "".join(f'<span class="tag">{html.escape(t)}</span>' for t in p["tags"])
-    source = (f'<a class="modal-source" href="{html.escape(p["u"])}" target="_blank" rel="noopener">在原始部落格開啟原文 →</a>'
-              if p.get("u") else "")
+    source = ""
     ld = {
         "@context": "https://schema.org", "@type": "Article", "headline": title,
         "datePublished": p["d"], "image": img, "url": url, "inLanguage": "zh-Hant-TW",
-        "author": {"@type": "Person", "name": "王威鵬醫師"}, "keywords": ", ".join(p["tags"]),
+        "author": {"@type": "Person", "name": "王威鵬醫師", "url": f"{SITE}/#about", "jobTitle": "中醫師"},
+        "publisher": {"@type": "Person", "name": "王威鵬醫師", "url": f"{SITE}/"},
+        "mainEntityOfPage": url, "keywords": ", ".join(p["tags"]),
     }
     e = html.escape
     return f"""<!doctype html>
@@ -168,6 +199,8 @@ def page(p, body):
 {local_body}
 <div class="modal-tags">{tags}</div>
 {source}
+{AUTHOR_HTML if p["c"] != "關於醫師" else ""}
+{related_html(p)}
 {share("bottom")}
     </div>
   </article>
@@ -193,6 +226,14 @@ for p in posts:
         continue
     (out / f"{p['id']}.html").write_text(page(p, body), encoding="utf-8")
     built.append(p)
+
+# crawlable plain-link article index on the homepage (between markers)
+links = "".join(f'<li><a href="posts/{p["id"]}.html">{html.escape(p["t"])}</a></li>' for p in sorted(built, key=lambda q: q["d"], reverse=True))
+index_block = ('<!--ARTICLE-INDEX-START--><section class="wrap" id="all-posts"><details><summary>全部文章索引（' + str(len(built)) +
+               ' 篇）</summary><ul class="all-posts-list">' + links + '</ul></details></section><!--ARTICLE-INDEX-END-->')
+idx = (ROOT / "index.html").read_text(encoding="utf-8")
+idx = re.sub(r"<!--ARTICLE-INDEX-START-->.*?<!--ARTICLE-INDEX-END-->", lambda m: index_block, idx, flags=re.S)
+(ROOT / "index.html").write_text(idx, encoding="utf-8")
 
 urls = [f"  <url><loc>{SITE}/</loc></url>", f"  <url><loc>{SITE}/contact.html</loc></url>"]
 urls += [f"  <url><loc>{SITE}/posts/{p['id']}.html</loc><lastmod>{p['d']}</lastmod></url>" for p in built]
