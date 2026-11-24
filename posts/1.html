@@ -2,6 +2,23 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="utf-8">
+<!-- Google tag (GA4) -->
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-FLVJZ5Q9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href]'); if(!a) return;
+    var h = a.getAttribute('href') || '', t = null;
+    if (h.indexOf('line.me') > -1) t = 'line';
+    else if (h.indexOf('tel:') === 0) t = 'phone';
+    else if (h.indexOf('google.com/maps') > -1) t = 'map';
+    else if (h.indexOf('contact.html') > -1) t = 'contact_page';
+    else if (h.indexOf('back-pain.html') > -1) t = 'back_pain_page';
+    if (t) gtag('event', 'contact_click', {link_type: t, link_url: h, page_path: location.pathname});
+  });
+</script>
 <title>膝蓋前側痛，髕骨韌帶無異常：青少年運動員的髕下脂肪墊發炎（Hoffa&#x27;s Disease）｜王威鵬醫師 臨床筆記</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="一位國中田徑隊的女學生，密集跑步訓練後，膝蓋下方偏內側開始疼痛。理學檢查排除了髕骨韌帶（patellar tendon）的問題，觸診推測疼痛來源是髕下脂肪墊（infrapatellar fat pad, IPFP）——也…">
@@ -340,6 +357,7 @@
   <div class="wrap">
     <div class="kai" style="margin-bottom:6px">王威鵬醫師 臨床筆記</div>
     <a href="/">回首頁</a> · <a href="/contact.html">看診資訊</a>
+    <div style="margin-top:8px;font-size:.78rem;opacity:.75">本站使用 Google Analytics 統計匿名瀏覽數據（使用 cookie），用於了解文章閱讀情形，不蒐集姓名等可直接識別個人身分的資料；你可在瀏覽器設定中封鎖 cookie。</div>
   </div>
 </footer>
 <script>

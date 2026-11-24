@@ -2,6 +2,23 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="utf-8">
+<!-- Google tag (GA4) -->
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-FLVJZ5Q9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href]'); if(!a) return;
+    var h = a.getAttribute('href') || '', t = null;
+    if (h.indexOf('line.me') > -1) t = 'line';
+    else if (h.indexOf('tel:') === 0) t = 'phone';
+    else if (h.indexOf('google.com/maps') > -1) t = 'map';
+    else if (h.indexOf('contact.html') > -1) t = 'contact_page';
+    else if (h.indexOf('back-pain.html') > -1) t = 'back_pain_page';
+    if (t) gtag('event', 'contact_click', {link_type: t, link_url: h, page_path: location.pathname});
+  });
+</script>
 <title>膝蓋內側半月板修補術後，緊繃彎不起來；中醫可以怎麼介入？｜王威鵬醫師 臨床筆記</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="中醫門診常遇到一類病人：膝關節手術後傷口早就好了，卻還在努力撐膝蓋的彎曲角度，復健進度卡在某個角度上不去。這篇想針對內側半月板修補術後這類疼痛與活動度受限背後可能的機轉，做一次整理，並探討中醫的手段可以在哪些點介入、以及…">
@@ -345,6 +362,7 @@
   <div class="wrap">
     <div class="kai" style="margin-bottom:6px">王威鵬醫師 臨床筆記</div>
     <a href="/">回首頁</a> · <a href="/contact.html">看診資訊</a>
+    <div style="margin-top:8px;font-size:.78rem;opacity:.75">本站使用 Google Analytics 統計匿名瀏覽數據（使用 cookie），用於了解文章閱讀情形，不蒐集姓名等可直接識別個人身分的資料；你可在瀏覽器設定中封鎖 cookie。</div>
   </div>
 </footer>
 <script>

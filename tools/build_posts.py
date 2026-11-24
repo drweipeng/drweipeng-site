@@ -55,6 +55,9 @@ PAGE_CSS = """
   .related a:hover{text-decoration:underline;}
 """
 
+GA_HEAD = '<!-- Google tag (GA4) -->\n<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-FLVJZ5Q9"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag(\'js\', new Date());\n  document.addEventListener(\'click\', function(e){\n    var a = e.target.closest && e.target.closest(\'a[href]\'); if(!a) return;\n    var h = a.getAttribute(\'href\') || \'\', t = null;\n    if (h.indexOf(\'line.me\') > -1) t = \'line\';\n    else if (h.indexOf(\'tel:\') === 0) t = \'phone\';\n    else if (h.indexOf(\'google.com/maps\') > -1) t = \'map\';\n    else if (h.indexOf(\'contact.html\') > -1) t = \'contact_page\';\n    else if (h.indexOf(\'back-pain.html\') > -1) t = \'back_pain_page\';\n    if (t) gtag(\'event\', \'contact_click\', {link_type: t, link_url: h, page_path: location.pathname});\n  });\n</script>\n'
+GA_NOTE = '<div style="margin-top:8px;font-size:.78rem;opacity:.75">本站使用 Google Analytics 統計匿名瀏覽數據（使用 cookie），用於了解文章閱讀情形，不蒐集姓名等可直接識別個人身分的資料；你可在瀏覽器設定中封鎖 cookie。</div>'
+
 AUTHOR_HTML = ('<aside class="author-box"><img src="../assets/wei-peng-photo.jpg" alt="王威鵬醫師">'
                '<div><div class="name">王威鵬 醫師</div>'
                '<p>具中、西醫雙執照，臨床著重腰椎、骨盆與膝關節等筋骨疼痛，結合超音波評估與中醫針刀、乾針及動作訓練。'
@@ -149,7 +152,7 @@ def page(p, body):
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="utf-8">
-<title>{e(title)}｜王威鵬醫師 臨床筆記</title>
+{GA_HEAD}<title>{e(title)}｜王威鵬醫師 臨床筆記</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{url}">
@@ -209,6 +212,7 @@ def page(p, body):
   <div class="wrap">
     <div class="kai" style="margin-bottom:6px">王威鵬醫師 臨床筆記</div>
     <a href="/">回首頁</a> · <a href="/contact.html">看診資訊</a>
+    {GA_NOTE}
   </div>
 </footer>
 {SHARE_JS}
