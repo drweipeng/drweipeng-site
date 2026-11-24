@@ -59,7 +59,7 @@ AUTHOR_HTML = ('<aside class="author-box"><img src="../assets/wei-peng-photo.jpg
                '<div><div class="name">王威鵬 醫師</div>'
                '<p>具中、西醫雙執照，臨床著重腰椎、骨盆與膝關節等筋骨疼痛，結合超音波評估與中醫針刀、乾針及動作訓練。'
                '目前於悅衡整合醫學診所（桃園）、民生瀚威中醫診所（台北）看診。</p>'
-               '<a href="/#about">關於醫師</a> · <a href="/contact.html">看診地點與門診時間</a></div></aside>')
+               '<a href="/#about">關於醫師</a> · <a href="/contact.html">看診地點與門診時間</a> · <a href="https://line.me/R/ti/p/@486tqkya" target="_blank" rel="noopener">官方 LINE</a></div></aside>')
 
 
 def related_html(p):
