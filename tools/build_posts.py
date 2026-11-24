@@ -83,10 +83,15 @@ def text_of(fragment):
     return re.sub(r"\s+", " ", html.unescape(t)).strip()
 
 
-def description(body):
+def description(body, n=110):
     paras = [text_of(p) for p in re.findall(r"<p>(.*?)</p>", body, re.S)]
     text = "".join(paras[:3]) or text_of(body)
-    return text[:110] + ("…" if len(text) > 110 else "")
+    return text[:n] + ("…" if len(text) > n else "")
+
+
+# 疼痛相關分類：title / description 加在地字眼（桃園）
+LOCAL_CATS = {"腰椎/骨盆", "膝關節", "神經壓迫", "運動傷害", "肩關節", "頸椎", "肩頸", "上肢/肌痛點"}
+LOCAL_SUFFIX = "桃園中醫 王威鵬醫師"
 
 
 def first_image(body):
@@ -129,7 +134,9 @@ def page(p, body):
     pid = p["id"]
     url = f"{SITE}/posts/{pid}.html"
     title = p["t"]
-    desc = description(body)
+    local = p["c"] in LOCAL_CATS
+    desc = description(body, 90) + f"｜{LOCAL_SUFFIX}" if local else description(body)
+    site_suffix = LOCAL_SUFFIX if local else "王威鵬醫師 臨床筆記"
     img = f"{SITE}/{p['og']}" if p.get("og") else first_image(body)
     from urllib.parse import quote
     line_url = "https://social-plugins.line.me/lineit/share?url=" + quote(url, safe="")
@@ -152,7 +159,7 @@ def page(p, body):
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="utf-8">
-{GA_HEAD}<title>{e(title)}｜王威鵬醫師 臨床筆記</title>
+{GA_HEAD}<title>{e(title)}｜{site_suffix}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{url}">
