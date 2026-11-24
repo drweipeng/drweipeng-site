@@ -59,7 +59,7 @@ AUTHOR_HTML = ('<aside class="author-box"><img src="../assets/wei-peng-photo.jpg
                '<div><div class="name">王威鵬 醫師</div>'
                '<p>具中、西醫雙執照，臨床著重腰椎、骨盆與膝關節等筋骨疼痛，結合超音波評估與中醫針刀、乾針及動作訓練。'
                '目前於悅衡整合醫學診所（桃園）、民生瀚威中醫診所（台北）看診。</p>'
-               '<a href="/#about">關於醫師</a> · <a href="/contact.html">看診地點與門診時間</a> · <a href="https://line.me/R/ti/p/@486tqkya" target="_blank" rel="noopener">官方 LINE</a></div></aside>')
+               '<a href="/#about">關於醫師</a> · <a href="/back-pain.html">腰臀門診說明</a> · <a href="/contact.html">看診地點與門診時間</a> · <a href="https://line.me/R/ti/p/@486tqkya" target="_blank" rel="noopener">官方 LINE</a></div></aside>')
 
 
 def related_html(p):
@@ -235,7 +235,7 @@ idx = (ROOT / "index.html").read_text(encoding="utf-8")
 idx = re.sub(r"<!--ARTICLE-INDEX-START-->.*?<!--ARTICLE-INDEX-END-->", lambda m: index_block, idx, flags=re.S)
 (ROOT / "index.html").write_text(idx, encoding="utf-8")
 
-urls = [f"  <url><loc>{SITE}/</loc></url>", f"  <url><loc>{SITE}/contact.html</loc></url>"]
+urls = [f"  <url><loc>{SITE}/</loc></url>", f"  <url><loc>{SITE}/contact.html</loc></url>", f"  <url><loc>{SITE}/back-pain.html</loc></url>"]
 urls += [f"  <url><loc>{SITE}/posts/{p['id']}.html</loc><lastmod>{p['d']}</lastmod></url>" for p in built]
 (ROOT / "sitemap.xml").write_text(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
